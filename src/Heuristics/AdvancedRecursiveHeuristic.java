@@ -1,4 +1,8 @@
-package at.fhooe.ai.rushhour;
+package Heuristics;
+
+import at.fhooe.ai.rushhour.Heuristic;
+import at.fhooe.ai.rushhour.Puzzle;
+import at.fhooe.ai.rushhour.State;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +29,7 @@ public class AdvancedRecursiveHeuristic implements Heuristic
 		fixedPositionIndexCar = puzzle.getFixedPosition(0);
 		orientationIndexCar = puzzle.getCarOrient(0);
 		
-		maxRecursionDepth = puzzle.getNumCars() / 2;
+		maxRecursionDepth = puzzle.getNumCars() / 4;
 	}
 	
 	/**
@@ -34,6 +38,8 @@ public class AdvancedRecursiveHeuristic implements Heuristic
 	 */
 	public int getValue(State state)
 	{
+		if (state.isGoal()) { return 0; }
+		
 		int indexCarPosition = state.getVariablePosition(0);
 		return GetCarsInWay(state, fixedPositionIndexCar, orientationIndexCar, indexCarPosition, true, 0, new ArrayList<>()).size();
 	}

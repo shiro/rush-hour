@@ -1,4 +1,8 @@
-package at.fhooe.ai.rushhour;
+package Heuristics;
+
+import at.fhooe.ai.rushhour.Heuristic;
+import at.fhooe.ai.rushhour.Puzzle;
+import at.fhooe.ai.rushhour.State;
 
 /**
  * This is a template for the class corresponding to the blocking heuristic.
@@ -27,10 +31,12 @@ public class BlockingHeuristic implements Heuristic
 	 */
 	public int getValue(State state)
 	{
+		if (state.isGoal()) { return 0; }
+		
 		int[][] grid = state.getGrid();
 		int indexCarPosition = state.getVariablePosition(0);
 		
-		int blockingCarCounter = 0;
+		int blockingCarCounter = 1;
 		
 		for (int i = indexCarPosition; i < grid.length; i++)
 		{
@@ -40,6 +46,6 @@ public class BlockingHeuristic implements Heuristic
 			if (currentCar != -1 && currentCar != 0) { blockingCarCounter++; }
 		}
 		
-		return blockingCarCounter + 1;
+		return blockingCarCounter;
 	}
 }

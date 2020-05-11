@@ -1,4 +1,8 @@
-package at.fhooe.ai.rushhour;
+package Heuristics;
+
+import at.fhooe.ai.rushhour.Heuristic;
+import at.fhooe.ai.rushhour.Puzzle;
+import at.fhooe.ai.rushhour.State;
 
 /**
  * This is a trivial heuristic function that always returns zero.
