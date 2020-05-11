@@ -6,7 +6,7 @@ package at.fhooe.ai.rushhour;
 public class ZeroHeuristic implements Heuristic
 {
 	/**
-	 * A vacuous constructor, provided in this form for consistancy with the other
+	 * A vacuous constructor, provided in this form for consistency with the other
 	 * <tt>Heuristic</tt> implementations.
 	 */
 	public ZeroHeuristic(Puzzle puzzle)

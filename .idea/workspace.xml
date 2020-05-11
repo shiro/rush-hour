@@ -1,8 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="2fcc4551-dade-43d3-a657-8c67a2a27bc3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/at/fhooe/ai/rushhour/AStar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/at/fhooe/ai/rushhour/AStar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/at/fhooe/ai/rushhour/AdvancedHeuristic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/at/fhooe/ai/rushhour/AdvancedHeuristic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/at/fhooe/ai/rushhour/BlockingHeuristic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/at/fhooe/ai/rushhour/BlockingHeuristic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/at/fhooe/ai/rushhour/ZeroHeuristic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/at/fhooe/ai/rushhour/ZeroHeuristic.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +44,8 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/data" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
@@ -31,11 +54,23 @@
     <property name="settings.editor.selected.configurable" value="MTConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="at.fhooe.ai.rushhour" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="G:\Programmordner\OneDrive\OneDrive - students.fh-hagenberg.at\FH\Master 2. Semester\Artificial Intelligence\Repository\rush-hour\data" />
       <recent name="$PROJECT_DIR$/data" />
     </key>
   </component>
   <component name="RunManager" selected="Application.RushHour">
+    <configuration name="RushHour test 2" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="at.fhooe.ai.rushhour.RushHour" />
+      <module name="rush-hour" />
+      <option name="PROGRAM_PARAMETERS" value="data/test-2.txt" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="RushHour test" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="at.fhooe.ai.rushhour.RushHour" />
       <module name="rush-hour" />
@@ -55,31 +90,70 @@
     <list>
       <item itemvalue="Application.RushHour" />
       <item itemvalue="Application.RushHour test" />
+      <item itemvalue="Application.RushHour test 2" />
     </list>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2fcc4551-dade-43d3-a657-8c67a2a27bc3" name="Default Changelist" comment="" />
+      <created>1589177413328</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1589177413328</updated>
+      <workItem from="1589177487309" duration="5516000" />
+    </task>
+    <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="WindowStateProjectService">
-    <state x="412" y="134" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1589154540682">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="412" y="129" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1589179017216">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state x="412" y="129" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/-1920.0.1920.1080@0.0.1920.1040" timestamp="1589179017216" />
     <state x="412" y="134" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1589154540682" />
-    <state width="1900" height="868" key="GridCell.Tab.0.bottom" timestamp="1589155512443">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="687" y="264" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1589178994190">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state x="687" y="264" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1920.1040/-1920.0.1920.1080@0.0.1920.1040" timestamp="1589178994190" />
+    <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1589178572283">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040/-1920.0.1920.1080@0.0.1920.1040" timestamp="1589178572283" />
+    <state width="1876" height="344" key="GridCell.Tab.0.bottom" timestamp="1589182453975">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1876" height="344" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1080@0.0.1920.1040" timestamp="1589182453975" />
     <state width="1900" height="868" key="GridCell.Tab.0.bottom/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1589155512443" />
-    <state width="1900" height="868" key="GridCell.Tab.0.center" timestamp="1589155512443">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="1876" height="344" key="GridCell.Tab.0.center" timestamp="1589182453975">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state width="1876" height="344" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1080@0.0.1920.1040" timestamp="1589182453975" />
     <state width="1900" height="868" key="GridCell.Tab.0.center/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1589155512443" />
-    <state width="1900" height="868" key="GridCell.Tab.0.left" timestamp="1589155512442">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="1876" height="344" key="GridCell.Tab.0.left" timestamp="1589182453975">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state width="1876" height="344" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1080@0.0.1920.1040" timestamp="1589182453975" />
     <state width="1900" height="868" key="GridCell.Tab.0.left/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1589155512442" />
-    <state width="1900" height="868" key="GridCell.Tab.0.right" timestamp="1589155512443">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="1876" height="344" key="GridCell.Tab.0.right" timestamp="1589182453975">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state width="1876" height="344" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1080@0.0.1920.1040" timestamp="1589182453975" />
     <state width="1900" height="868" key="GridCell.Tab.0.right/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1589155512443" />
     <state width="1372" height="582" key="GridCell.Tab.1.bottom" timestamp="1589155459000">
       <screen x="0" y="0" width="1920" height="1080" />

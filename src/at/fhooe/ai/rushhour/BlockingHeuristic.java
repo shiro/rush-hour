@@ -36,9 +36,10 @@ public class BlockingHeuristic implements Heuristic
 		{
 			int currentCar = orientationIndexCar ? grid[fixedPositionIndexCar][i] : grid[i][fixedPositionIndexCar];
 			
+			// it would be even somewhat cleaner to store already encountered car indices in a list and run through that list at every new grid tile, but this is unnecessary, since this car then would also have to leave through the exit, which it must not do according to the rules
 			if (currentCar != -1 && currentCar != 0) { blockingCarCounter++; }
 		}
 		
-		return blockingCarCounter;
+		return blockingCarCounter + 1;
 	}
 }
