@@ -7,21 +7,21 @@ package at.fhooe.ai.rushhour;
  * and the <tt>getValue</tt> method.
  */
 public class AdvancedHeuristic implements Heuristic {
-
-    /**
-     * This is the required constructor, which must be of the given form.
-     */
-    public AdvancedHeuristic(Puzzle puzzle) {
-      // TODO
-    }
 	
-    /**
-     * This method returns the value of the heuristic function at the
-     * given state.
-     */
-    public int getValue(State state) {
-      // TODO
-      return 0;
-    }
-
+	/**
+	 * This is the required constructor, which must be of the given form.
+	 */
+	public AdvancedHeuristic(Puzzle puzzle) {
+		// TODO
+	}
+	
+	/**
+	 * This method returns the value of the heuristic function at the
+	 * given state.
+	 */
+	public int getValue(State state) {
+		// TODO
+		return 0;
+	}
+	
 }
