@@ -3,9 +3,9 @@
 The goal is to move the red car to the goal to solve the puzzle.
 
 TODO:
-- [ ] A*
-- [ ] blocking herustic
-- [ ] advanced herustic
+- [x] A*
+- [x] blocking heuristic
+- [ ] advanced heuristic
 - [ ] result evaluation
 - [ ] presentation
 
