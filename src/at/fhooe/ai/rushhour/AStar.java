@@ -22,8 +22,10 @@ public class AStar {
 
 
     private PriorityQueue<Node> openList;
+    // private final TreeSet<Node> openList;
+    // private final TreeMap<Integer, HashSet<Node>> openList;
     // private TreeSet<Node> closedList;
-    private HashSet<State> closedList;
+    private final HashSet<State> closedList;
 
     /**
      * This is the constructor that performs A* search to compute a
@@ -31,20 +33,22 @@ public class AStar {
      */
     public AStar(Puzzle puzzle, Heuristic heuristic) {
         // evaluate the node cost based on the depth plus heuristic value
-        Function<Node, Integer> getDepth = (Node n) -> n.getDepth() + heuristic.getValue(n.getState());
+        Function<Node, Integer> nodeCost = (Node n) -> n.getDepth() + heuristic.getValue(n.getState());
 
         // compare nodes based on their estimated cost
         Comparator<Node> cmp = (n1, n2) -> {
-            int cost1 = getDepth.apply(n1);
-            int cost2 = getDepth.apply(n2);
+            int cost1 = nodeCost.apply(n1);
+            int cost2 = nodeCost.apply(n2);
 
-            return Integer.compare(cost1, cost2);
+            int val =  Integer.compare(cost1, cost2);
+            if (val != 0) return val;
+
+            // compare cost, then depth (preferring deeper nodes)
+            return Integer.compare(n2.getDepth(), n1.getDepth());
         };
 
         openList = new PriorityQueue<>(cmp);
-        closedList = new HashSet<State>();
-        // todo find out why TreeSet would be useful here
-        // closedList = new TreeSet<State>();
+        closedList = new HashSet<>();
 
         Node node = puzzle.getInitNode();
 
@@ -53,20 +57,21 @@ public class AStar {
 
             State[] expStates = currState.expand();
 
+            // expand all child nodes and enqueue them (possibly multiple times on different depths)
             for (State s : expStates) {
-                Node no = new Node(s, node.getDepth() + 1, node);
+                Node expandedNode = new Node(s, node.getDepth() + 1, node);
 
-                if (closedList.contains(no.getState())) continue;
+                if (closedList.contains(expandedNode.getState())) continue;
 
-                // add the node to the queue
-                closedList.add(no.getState());
-                // todo add all at once for perf
-                openList.add(no);
+                openList.add(expandedNode);
             }
 
-            // todo check for null
-            Node nodeToCheck = openList.poll();
-            node = nodeToCheck;
+            while (closedList.contains(node.getState())) {
+                node = openList.poll();
+                assert node != null; // if we get here there is no solution and the puzzle is invalid
+            }
+
+            closedList.add((node.getState()));
         }
 
         this.path = new State[node.getDepth() + 1];
