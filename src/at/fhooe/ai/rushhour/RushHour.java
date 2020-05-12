@@ -42,7 +42,7 @@ public class RushHour {
       System.out.println("puzzle = " + puzzles[i].getName());
 
       Heuristic[] heuristics = { // these are the heuristics to be used
-          new ZeroHeuristic(puzzles[i]), new ForeignBlockingHeuristic(puzzles[i]), new BlockingHeuristic(puzzles[i]), /*new AdvancedHeuristic(puzzles[i]),*/ new AdvancedRecursiveHeuristic(puzzles[i]), };
+          new ZeroHeuristic(puzzles[i]), new BlockingHeuristic(puzzles[i]), /*new AdvancedHeuristic(puzzles[i]),*/ new AdvancedRecursiveHeuristic(puzzles[i]), };
 
       if (i == 0) {
         num_heuristics = heuristics.length;
@@ -106,9 +106,6 @@ public class RushHour {
 
     for (int i = 0; i < num_puzzles; i++) {
       System.out.print(right_pad(puzzles[i].getName(), 10));
-      
-      boolean sameDepth = true;
-      boolean allOthersSameDepth = true;
 
       for (int h = 0; h < num_heuristics; h++) {
         if (soln_depth[i][h] < 0) {
@@ -118,16 +115,6 @@ public class RushHour {
               + left_pad(Integer.toString(soln_depth[i][h]), 4) + " "
               + left_pad(brfac_nf.format(BranchingFactor.compute(num_expanded[i][h], soln_depth[i][h])), 7));
         }
-        
-        if (soln_depth[i][h] != soln_depth[i][0]) { sameDepth = false; }
-        if (h > 1 && allOthersSameDepth && soln_depth[i][h] != soln_depth[i][h - 1]) { allOthersSameDepth = false; }
-      }
-      
-      if (allOthersSameDepth) {
-        System.out.print(" | x |");
-      }
-      if (sameDepth) {
-        System.out.print(" | x |");
       }
       System.out.println();
     }

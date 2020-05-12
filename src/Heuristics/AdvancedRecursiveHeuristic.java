@@ -16,9 +16,6 @@ import java.util.List;
  */
 public class AdvancedRecursiveHeuristic implements Heuristic
 {
-	private final int fixedPositionIndexCar;
-	private final boolean orientationIndexCar;
-	
 	private final int maxRecursionDepth;
 	
 	/**
@@ -26,10 +23,7 @@ public class AdvancedRecursiveHeuristic implements Heuristic
 	 */
 	public AdvancedRecursiveHeuristic(Puzzle puzzle)
 	{
-		fixedPositionIndexCar = puzzle.getFixedPosition(0);
-		orientationIndexCar = puzzle.getCarOrient(0);
-		
-		maxRecursionDepth = puzzle.getNumCars() / 4;
+		maxRecursionDepth = puzzle.getNumCars();
 	}
 	
 	/**
@@ -41,37 +35,117 @@ public class AdvancedRecursiveHeuristic implements Heuristic
 		if (state.isGoal()) { return 0; }
 		
 		int indexCarPosition = state.getVariablePosition(0);
-		return GetCarsInWay(state, fixedPositionIndexCar, orientationIndexCar, indexCarPosition, true, 0, new ArrayList<>()).size();
+		List<Integer> carsInTheWay = GetCarsInWay(state, state.getPuzzle().getFixedPosition(0), state.getPuzzle().getCarOrient(0), indexCarPosition, state.getPuzzle().getGridSize(), 0, new ArrayList<>());
+		
+		if (carsInTheWay == null) { return Integer.MAX_VALUE; }
+		
+		return carsInTheWay.size();
 	}
 	
-	private List<Integer> GetCarsInWay(State state, int row, boolean rowOrientation, int startPosition, boolean lookDirection, int recursionDepth, List<Integer> alreadyFoundCars)
+	private List<Integer> GetCarsInWay(State state, int row, boolean rowOrientation, int startPosition, int endPosition, int recursionDepth, List<Integer> alreadyFoundCars)
 	{
 		int[][] grid = state.getGrid();
+		boolean travellingDirection = false;
 		
-		int startIndex = lookDirection ? startPosition : 0;
-		int endIndex = lookDirection ? state.getPuzzle().getGridSize() : startPosition;
 		int initialCarIndex = rowOrientation ? grid[row][startPosition] : grid[startPosition][row];
 		
-		List<Integer> newlyFoundCars = new ArrayList<>();
-		if (!alreadyFoundCars.contains(initialCarIndex)) { newlyFoundCars.add(initialCarIndex); }
+		// If the start & end index are in the wrong order, swap them
+		if (startPosition > endPosition)
+		{
+			int temp = startPosition;
+			startPosition = endPosition;
+			endPosition = temp;
+			
+			travellingDirection = true;
+		}
 		
-		for (int i = startIndex; i < endIndex; i++)
+		
+		List<Integer> newlyFoundCars = new ArrayList<>();
+		if (initialCarIndex != -1 && !alreadyFoundCars.contains(initialCarIndex)) { newlyFoundCars.add(initialCarIndex); }
+		
+		for (int i = startPosition; i < endPosition; i++)
 		{
 			int currentCar = rowOrientation ? grid[row][i] : grid[i][row];
 			
-			if (currentCar != -1 && currentCar != initialCarIndex && !alreadyFoundCars.contains(currentCar) && !newlyFoundCars.contains(currentCar))
+			if (currentCar != -1 && !alreadyFoundCars.contains(currentCar) && !newlyFoundCars.contains(currentCar))
 			{
 				newlyFoundCars.add(currentCar);
 				
 				if (recursionDepth < maxRecursionDepth)
 				{
-					int newRow = state.getPuzzle().getCarOrient(currentCar) == rowOrientation ? row : i;
-					int newStartPosition = state.getPuzzle().getCarOrient(currentCar) == rowOrientation ? i : row;
+					// currently active car properties
+					boolean currentCarOrientation = state.getPuzzle().getCarOrient(currentCar);
+					int currentCarSize = state.getPuzzle().getCarSize(currentCar);
+					int currentCarPosition = state.getVariablePosition(currentCar);
 					
-					List<Integer> foundCarsLookingForward = GetCarsInWay(state, newRow, state.getPuzzle().getCarOrient(currentCar), newStartPosition, true, recursionDepth + 1, newlyFoundCars);
-					List<Integer> foundCarsLookingBackward = GetCarsInWay(state, newRow, state.getPuzzle().getCarOrient(currentCar), newStartPosition, false, recursionDepth + 1, newlyFoundCars);
 					
-					newlyFoundCars.addAll(foundCarsLookingForward.size() < foundCarsLookingBackward.size() ? foundCarsLookingForward : foundCarsLookingBackward);
+					boolean isNewCarOrientedSame = currentCarOrientation == rowOrientation;
+					
+					int newRow = isNewCarOrientedSame ? row : i;
+					
+					
+					
+					List<Integer> foundCarsLookingForward = new ArrayList<>();
+					List<Integer> foundCarsLookingBackward = new ArrayList<>();
+					
+					boolean forwardMovePossible = isNewCarOrientedSame ?
+							travellingDirection && currentCarPosition - (endPosition - startPosition) >= 0 :
+							currentCarSize <= row;
+					
+					boolean backwardMovePossible = isNewCarOrientedSame ?
+							!travellingDirection && currentCarPosition + currentCarSize + (endPosition - startPosition) < state.getPuzzle().getGridSize() :
+							state.getPuzzle().getGridSize() - row > currentCarSize;
+					
+					if (!forwardMovePossible && !backwardMovePossible)
+					{
+						// Only possible, if there are two cars in the same direction and the first car requires the second to go further than it can
+						return null;
+					}
+					
+					ArrayList<Integer> totalListOfCars = new ArrayList<>(newlyFoundCars);
+					totalListOfCars.addAll(alreadyFoundCars);
+					
+					// only compute the cars ahead, if the current car even fits between the wall and the current row
+					if (forwardMovePossible)
+					{
+						int targetPosition = (isNewCarOrientedSame) ? currentCarPosition - (endPosition - startPosition) : row - currentCarSize;
+						foundCarsLookingForward = GetCarsInWay(
+								state,
+								newRow,
+								currentCarOrientation,
+								currentCarPosition,
+								targetPosition,
+								recursionDepth + 1,
+								totalListOfCars);
+					}
+					if (backwardMovePossible)
+					{
+						int targetPosition = (isNewCarOrientedSame) ? currentCarPosition + currentCarSize + (endPosition - startPosition) : row + currentCarSize + 1;
+						foundCarsLookingBackward = GetCarsInWay(
+								state,
+								newRow,
+								currentCarOrientation,
+								currentCarPosition + currentCarSize,
+								targetPosition,
+								recursionDepth + 1,
+								totalListOfCars);
+					}
+					
+					
+					// look where less cars were found (forwards or backwards) and add those found to the list of found cars
+					if (forwardMovePossible && backwardMovePossible && foundCarsLookingForward != null && foundCarsLookingBackward != null)
+					{
+						if (foundCarsLookingForward.size() < foundCarsLookingBackward.size())
+						{
+							newlyFoundCars.addAll(foundCarsLookingForward);
+						}
+						else
+						{
+							newlyFoundCars.addAll(foundCarsLookingBackward);
+						}
+					}
+					if (forwardMovePossible && !backwardMovePossible && foundCarsLookingForward != null) { newlyFoundCars.addAll(foundCarsLookingForward); }
+					if (!forwardMovePossible && foundCarsLookingBackward != null) { newlyFoundCars.addAll(foundCarsLookingBackward); }
 				}
 			}
 		}

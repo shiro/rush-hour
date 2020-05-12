@@ -52,6 +52,5 @@ public class AdvancedHeuristic implements Heuristic
 		int blockingCarSize = state.getPuzzle().getCarSize(carIndex);
 		
 		return row - blockingCarPosition;
-		//return (blockingCarSize <= row && blockingCarPosition < row) ? blockingCarPosition : state.getPuzzle().getGridSize() - blockingCarPosition - blockingCarSize;
 	}
 }
